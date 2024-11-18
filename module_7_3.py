@@ -7,30 +7,25 @@ class WordsFinder:
     def get_all_words(self):
         all_words = {}
         for file_name in self.file_name:
-            with (open(file_name, 'r', encoding='utf-8') as f):
-                words_content = f.read().lower()
-                str_punk = str.maketrans(',', ',', string.punctuation + '-')
-                words_content = words_content.translate(str_punk)
-                words = words_content.split()
+            with open(file_name, 'r', encoding='utf-8') as file:
+                line = file.read().lower()
+                for punctuation in [',', '.', '=', '!', '?', ';', ':', ' - ']:
+                    line = line.replace(punctuation, '')
+                words = line.split()
                 all_words[file_name] = words
-                return all_words
+        return all_words
     def find(self, word):
-        all_words = self.get_all_words()
-        result = {}
-        word = word.lower()
-        for file_name, words in all_words.items():
-            if word in words:
-                result[file_name] = words.index(word)
-            return word, result
+        dict_ = {}
+        for name, words in self.get_all_words().items():
+            if word.lower() in words:
+                dict_[name] = words.index(word.lower()) + 1
+        return dict_
     def count(self, word):
-        all_words = self.get_all_words()
-        result = {}
-        word = word.lower()
-        for file_name, words in all_words.items():
-            result[file_name] = words.count(word)
-            return result
-if __name__ == '__main__':
-    finder2 = WordsFinder('test_file.txt')
+        dict_ = {}
+        for name, words in self.get_all_words().items():
+            dict_[name] = words.count(word.lower())
+            return dict_
+finder2 = WordsFinder('test_file.txt')
 print(finder2.get_all_words())
 print(finder2.find('TEXT'))
 print(finder2.count('teXT'))
