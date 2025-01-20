@@ -1,9 +1,10 @@
-first = int(input('Enter number: '))
-second = int(input('Enter number: '))
-third = int(input('Enter number: '))
-if first == second == third:
-    print(3)
-elif first == second or first == third or second == third:
-    print(2)
-else:
-    print(0)
+'1st program'
+print(9 ** 0.5 * 5)
+"2nd program"
+print(9.99 > 9.98, 1000 != 1000.1)
+"3rd program"
+print(2 * 2 + 2)
+print(2 * (2 + 2))
+print((2 * 2 + 2) == (2 * (2 + 2)))
+"4th program"
+print(int(float('123.456') * 10) % 10)
